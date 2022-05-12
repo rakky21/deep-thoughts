@@ -39,11 +39,18 @@ const resolvers = {
 
   Mutation: {
     addUser: async (parent, args) => {
+      // console.log('signupresolver')
+      try {
+        console.log(args)
       const user = await User.create(args);
       const token = signToken(user);
 
       return { token, user };
-    },
+    }
+    catch (err) {
+      console.log(err)
+    }
+  },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
